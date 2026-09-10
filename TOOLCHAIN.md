@@ -17,7 +17,7 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 
-#### RISC-V GCC (ESP32-C6)
+#### RISC-V GCC (ESP32-C3)
 ```text
 riscv32-esp-elf-gcc (crosstool-NG esp-14.2.0_20260121) 14.2.0
 Copyright (C) 2024 Free Software Foundation, Inc.
