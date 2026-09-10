@@ -1,0 +1,49 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "esp32",
+      "displayName": "ESP32 (bench)",
+      "description": "Bench measurement image for ESP32, Xtensa LX6, 240 MHz",
+      "binaryDir": "${sourceDir}/build/esp32",
+      "cacheVariables": {
+        "IDF_TARGET": "esp32",
+        "SDKCONFIG": "${sourceDir}/build/esp32/sdkconfig",
+        "SDKCONFIG_DEFAULTS": "sdkconfig.defaults;sdkconfig.defaults.esp32"
+      }
+    },
+    {
+      "name": "esp32c3",
+      "displayName": "ESP32-C3 (bench)",
+      "description": "Bench measurement image for ESP32-C3, RISC-V, 160 MHz",
+      "binaryDir": "${sourceDir}/build/esp32c3",
+      "cacheVariables": {
+        "IDF_TARGET": "esp32c3",
+        "SDKCONFIG": "${sourceDir}/build/esp32c3/sdkconfig",
+        "SDKCONFIG_DEFAULTS": "sdkconfig.defaults;sdkconfig.defaults.esp32c3"
+      },
+      "vendor": {
+        "espressif/vscode-esp-idf": {
+          "schemaVersion": 1,
+          "settings": [
+            {
+              "type": "openOCD",
+              "value": {
+                "debugLevel": 2,
+                "configs": [
+                  "board/esp32c3-ftdi.cfg"
+                ],
+                "args": []
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
