@@ -1,0 +1,9 @@
+menu "Bench harness options"
+    config BENCH_AES_SWEEP_ONLY
+        bool "Run only the AES-GCM sweep (skip Ascon + ML-KEM)"
+        default n
+        help
+            Set to y by the aes-sw build presets so the sw-only run doesn't
+            waste time re-measuring Ascon/ML-KEM, which the primary preset
+            already covers.
+endmenu

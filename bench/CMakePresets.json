@@ -14,7 +14,7 @@
       "cacheVariables": {
         "IDF_TARGET": "esp32",
         "SDKCONFIG": "${sourceDir}/build/esp32/sdkconfig",
-        "SDKCONFIG_DEFAULTS": "sdkconfig.defaults;sdkconfig.defaults.esp32"
+        "SDKCONFIG_DEFAULTS": "sdkconfig.defaults;sdkconfig.defaults.esp32;sdkconfig.defaults.aes_hw"
       }
     },
     {
@@ -25,7 +25,7 @@
       "cacheVariables": {
         "IDF_TARGET": "esp32c3",
         "SDKCONFIG": "${sourceDir}/build/esp32c3/sdkconfig",
-        "SDKCONFIG_DEFAULTS": "sdkconfig.defaults;sdkconfig.defaults.esp32c3"
+        "SDKCONFIG_DEFAULTS": "sdkconfig.defaults;sdkconfig.defaults.esp32c3;sdkconfig.defaults.aes_hw"
       },
       "vendor": {
         "espressif/vscode-esp-idf": {
@@ -43,6 +43,28 @@
             }
           ]
         }
+      }
+    },
+    {
+      "name": "esp32-aes-sw",
+      "displayName": "ESP32 (bench, AES sw-only sweep)",
+      "description": "AES-128-GCM software-only sweep, ESP32",
+      "binaryDir": "${sourceDir}/build/esp32-aes-sw",
+      "cacheVariables": {
+        "IDF_TARGET": "esp32",
+        "SDKCONFIG": "${sourceDir}/build/esp32-aes-sw/sdkconfig",
+        "SDKCONFIG_DEFAULTS": "sdkconfig.defaults;sdkconfig.defaults.esp32;sdkconfig.defaults.aes_sw"
+      }
+    },
+    {
+      "name": "esp32c3-aes-sw",
+      "displayName": "ESP32-C3 (bench, AES sw-only sweep)",
+      "description": "AES-128-GCM software-only sweep, ESP32-C3",
+      "binaryDir": "${sourceDir}/build/esp32c3-aes-sw",
+      "cacheVariables": {
+        "IDF_TARGET": "esp32c3",
+        "SDKCONFIG": "${sourceDir}/build/esp32c3-aes-sw/sdkconfig",
+        "SDKCONFIG_DEFAULTS": "sdkconfig.defaults;sdkconfig.defaults.esp32c3;sdkconfig.defaults.aes_sw"
       }
     }
   ]
