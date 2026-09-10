@@ -10,6 +10,18 @@
                                                  next xTaskCreatePinnedToCore call */
 #define BENCH_TASK_PRIORITY    5
 
+/* Phase 4 — Bachmann opt64 calibration gate (32 kB long-input protocol,
+ * Bachmann §5.1: 32 samples of 4 repeats each, cycles/4, one warm-up call) */
+#define GATE64_PAYLOAD_BYTES   32768u
+#define GATE64_AD_BYTES        0u      /* Bachmann's dedicated benchmarking
+                                           command varies only message length —
+                                           no AD parameter appears in that path.
+                                           Inference, not a stated number; first
+                                           thing to revisit if the gate fails. */
+#define GATE64_SAMPLES         32u
+#define GATE64_REPEATS         4u
+#define GATE64_WARMUP_CALLS    1u
+
 static const size_t BENCH_PAYLOAD_SIZES[] = {16, 32, 64, 128, 256, 1024, 4096};
 #define BENCH_NUM_PAYLOADS (sizeof(BENCH_PAYLOAD_SIZES)/sizeof(BENCH_PAYLOAD_SIZES[0]))
 

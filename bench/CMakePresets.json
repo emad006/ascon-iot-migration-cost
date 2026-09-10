@@ -66,6 +66,28 @@
         "SDKCONFIG": "${sourceDir}/build/esp32c3-aes-sw/sdkconfig",
         "SDKCONFIG_DEFAULTS": "sdkconfig.defaults;sdkconfig.defaults.esp32c3;sdkconfig.defaults.aes_sw"
       }
+    },
+    {
+      "name": "esp32-gate64",
+      "displayName": "ESP32 (bench, Phase 4 Bachmann gate)",
+      "description": "Bachmann opt64 32 kB calibration gate, ESP32",
+      "binaryDir": "${sourceDir}/build/esp32-gate64",
+      "cacheVariables": {
+        "IDF_TARGET": "esp32",
+        "SDKCONFIG": "${sourceDir}/build/esp32-gate64/sdkconfig",
+        "SDKCONFIG_DEFAULTS": "sdkconfig.defaults;sdkconfig.defaults.esp32;sdkconfig.defaults.gate64"
+      }
+    },
+    {
+      "name": "esp32c3-gate64",
+      "displayName": "ESP32-C3 (bench, Phase 4 Bachmann gate)",
+      "description": "Bachmann opt64 32 kB calibration gate, ESP32-C3",
+      "binaryDir": "${sourceDir}/build/esp32c3-gate64",
+      "cacheVariables": {
+        "IDF_TARGET": "esp32c3",
+        "SDKCONFIG": "${sourceDir}/build/esp32c3-gate64/sdkconfig",
+        "SDKCONFIG_DEFAULTS": "sdkconfig.defaults;sdkconfig.defaults.esp32c3;sdkconfig.defaults.gate64"
+      }
     }
   ]
 }

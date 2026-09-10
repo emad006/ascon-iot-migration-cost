@@ -6,4 +6,12 @@ menu "Bench harness options"
             Set to y by the aes-sw build presets so the sw-only run doesn't
             waste time re-measuring Ascon/ML-KEM, which the primary preset
             already covers.
+    
+    config BENCH_GATE64_ONLY
+        bool "Bachmann opt64 calibration gate only (Phase 4)"
+        default n
+        help
+            Set to y by the gate64 build presets. Runs only the Phase 4
+            Bachmann opt64 gate (Ascon-128a and Ascon-128 at 32 KB) and
+            skips the Phase 3 Ascon opt32 sweep, ML-KEM, and AES-GCM.
 endmenu

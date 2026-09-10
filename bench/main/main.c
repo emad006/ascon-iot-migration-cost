@@ -22,7 +22,7 @@
 #define MLK_CONFIG_FILE "my_mlkem_config.h"
 #include "mlkem_native.h"
 
-static SemaphoreHandle_t s_done;
+SemaphoreHandle_t s_done;   /* not static — gate64.c needs extern access to this */
 
 typedef struct {
     const char *name;
@@ -192,9 +192,14 @@ static void launch_and_wait(TaskFunction_t fn, void *arg, uint32_t stack_bytes) 
 
 void app_main(void) {
     s_done = xSemaphoreCreateBinary();
-
     printf("board,algorithm,impl,operation,payload_bytes,ad_bytes,iteration,cycles\n");
 
+#if CONFIG_BENCH_GATE64_ONLY
+    extern void gate64_task(void *pv);
+    launch_and_wait(gate64_task, NULL, BENCH_TASK_STACK_BYTES_SMALL);
+    printf("GATE64: matrix complete, board=%s\n", BENCH_BOARD);
+    while (1) { vTaskDelay(pdMS_TO_TICKS(1000)); }
+#else
     static const ascon_variant_t variants[] = {
         { "AsconAEAD128", ascon_aead128_opt32_encrypt, ascon_aead128_opt32_decrypt },
         { "Ascon128a",    ascon_128a_opt32_encrypt,    ascon_128a_opt32_decrypt },
@@ -204,12 +209,10 @@ void app_main(void) {
 #if !CONFIG_BENCH_AES_SWEEP_ONLY
     for (size_t i = 0; i < 3; i++)
         launch_and_wait(bench_ascon_task, (void *)&variants[i], BENCH_TASK_STACK_BYTES_SMALL);
-
     launch_and_wait(bench_mlkem_task, NULL, BENCH_TASK_STACK_BYTES);
 #endif
-
     launch_and_wait(bench_aesgcm_task, NULL, BENCH_TASK_STACK_BYTES_SMALL);
-
     printf("BENCH: matrix complete, board=%s aes_impl=%s\n", BENCH_BOARD, AES_IMPL_LABEL);
     while (1) { vTaskDelay(pdMS_TO_TICKS(1000)); }
+#endif
 }

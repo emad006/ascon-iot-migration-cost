@@ -32,7 +32,7 @@ IDF_MONITOR="$IDF_PATH_VAL/tools/idf_monitor.py"
 IDF_PY="$IDF_PATH_VAL/tools/idf.py"
 
 usage() {
-  echo "Usage: $0 <esp32|esp32c3> <base|aessw> [port]" >&2
+  echo "Usage: $0 <esp32|esp32c3> <base|aessw|gate64> [port]" >&2
   exit 1
 }
 
@@ -48,8 +48,8 @@ case "$TARGET" in
 esac
 
 case "$LABEL" in
-  base|aessw) ;;
-  *) echo "Unknown config '$LABEL' (expected base or aessw)" >&2; exit 1 ;;
+  base|aessw|gate64) ;;
+  *) echo "Unknown config '$LABEL' (expected base, aessw, or gate64)" >&2; exit 1 ;;
 esac
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -60,6 +60,8 @@ REPO_ROOT="$(cd "$BENCH_DIR/.." && pwd)"
 # under build/<target>-aes-sw/ per the CMakePresets.json in the Phase 3 guide.
 if [ "$LABEL" = "aessw" ]; then
   ELF="$BENCH_DIR/build/${TARGET}-aes-sw/bench.elf"
+elif [ "$LABEL" = "gate64" ]; then
+  ELF="$BENCH_DIR/build/${TARGET}-gate64/bench.elf"
 else
   ELF="$BENCH_DIR/build/${TARGET}/bench.elf"
 fi
